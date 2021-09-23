@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+. selected {
+    background: blue;
+}
+
+.sidebar {
+    width: 20%;
+}
+
+.main {
+    width: 80%
+}
