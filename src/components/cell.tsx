@@ -22,10 +22,9 @@ const Cell = ({num, lastPosition, onInFrame}: {
         window.addEventListener("scroll", () => {
             if (
                 containerRef.current &&
-                containerRef.current.getBoundingClientRect().y < 250 &&
-                containerRef.current.getBoundingClientRect().bottom > 250
+                containerRef.current.getBoundingClientRect().y < 300 &&
+                containerRef.current.getBoundingClientRect().bottom > 300
             ) {
-                setLastDotPosition(lastPosition); // Here set the last dot position before we update it
                 setIsInFrame(true);
                 onInFrame(dotRef.current && dotRef.current.getBoundingClientRect().y); // Then update it here (send to parent)
             } else {setIsInFrame(false)}
@@ -49,19 +48,19 @@ const Cell = ({num, lastPosition, onInFrame}: {
     }, [isInFrame]);
 
     return (
-        <div className="container" style={{height: "2 50px"}} ref={containerRef}>
+        <div className="container" style={{height: "250px"}} ref={containerRef}>
             <div className={"sidebar"} style={{display: "flex", flexDirection: "column"}}>
                 <p>Section {num}</p>
                 <div style={{
                     fontSize: "5rem",
                     color: "turquoise",
                     visibility: isInFrame ? "visible" : "hidden",
-                    transition: "transform 0.5s ease-in-out",
+                    transition: "transform 0.4s ease-out",
                     transform: isInFrame ?
-                        "translateY(0)" : ((lastDotPosition && dotRef.current) ?
-                            (lastDotPosition > dotRef.current.getBoundingClientRect().y ?
-                                `translateY(${lastDotPosition - dotRef.current.getBoundingClientRect().y}px)` :
-                                `translateY(-${dotRef.current.getBoundingClientRect().y - lastDotPosition}px)`) : "translateY(-10px)")
+                        "translateY(0)" : ((lastPosition && dotRef.current) ?
+                            (lastPosition > dotRef.current.getBoundingClientRect().y ?
+                                `translateY(${lastPosition - dotRef.current.getBoundingClientRect().y}px)` :
+                                `translateY(-${dotRef.current.getBoundingClientRect().y - lastPosition}px)`) : "translateY(-10px)")
                 }}
                      ref={dotRef}
                 >•</div>
